@@ -11,7 +11,7 @@ function filtrarLivros () {
 
     let livrosFiltrados = livros.filter(livros => livros.categoria == categoria) // Filtra o array 'livros' para pegar só os livros que têm a mesma categoria do botão clicado
 
-    console.table(livrosFiltrados) // Exibe os livros filtrados no formato de tabela no console do navegador
+    exibirOsLivrosNaTela(livrosFiltrados) // Exibe os livros filtrados no formato de tabela no console do navegador
 }
 
 
