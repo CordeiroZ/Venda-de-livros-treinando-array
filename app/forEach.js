@@ -18,4 +18,3 @@ function exibirOsLivrosNaTela(listaDeLivros) {
     })
 }
 
-// teste git
