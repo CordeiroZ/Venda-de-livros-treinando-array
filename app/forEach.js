@@ -1,7 +1,8 @@
 const elementoParaInserirLivros = document.getElementById('livros') // Pega o elemento HTML com id 'livros' onde os dados serão inseridos
-
+const elementoComValorTotalDeLivrosDisponiveis = document.getElementById('valor_total_livros_disponiveis')
 // Esta função percorre a lista de livros e adiciona cada um na tela dentro do elemento HTML 'livros'
 function exibirOsLivrosNaTela(listaDeLivros) {
+    elementoComValorTotalDeLivrosDisponiveis.innerHTML = ''
     elementoParaInserirLivros.innerHTML = '' // Limpa o conteúdo anterior
     listaDeLivros.forEach(livro => { // Para cada livro na lista, executa o código abaixo
        // let disponibilidade = verificarDisponiblidadeDoLivro(livro) // Verifica se o livro está disponível

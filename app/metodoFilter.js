@@ -1,24 +1,50 @@
-// Esta parte seleciona todos os botões com a classe 'btn' e adiciona um evento de clique para cada um, que chama a função 'filtrarLivros' quando clicado.
-const botoes = document.querySelectorAll('.btn') // Seleciona todos os elementos do HTML que têm a classe 'btn' e guarda na constante 'botoes'
-botoes.forEach(btn => btn.addEventListener('click', filtrarLivros)) // Para cada botão encontrado, adiciona um ouvinte de evento que chama a função 'filtrarLivros' quando o botão for clicado
+// Seleciona todos os botões com a classe 'btn' no HTML
+const botoes = document.querySelectorAll('.btn')
 
-// Esta função é responsável por filtrar os livros de acordo com a categoria do botão clicado.
-// Quando o usuário clica em um botão, ela pega a categoria do botão e filtra os livros que pertencem a essa categoria.
+// Para cada botão encontrado, adiciona um evento de clique que chama a função 'filtrarLivros'
+botoes.forEach(btn => btn.addEventListener('click', filtrarLivros))
+
+// Função que executa quando um botão é clicado
 function filtrarLivros () {
-    const elementoBtn = document.getElementById(this.id) // Pega o elemento do botão clicado usando o ID do botão (this.id)
+    // Pega o elemento do botão clicado usando o ID dele (this.id refere-se ao botão clicado)
+    const elementoBtn = document.getElementById(this.id)
 
-    const categoria = elementoBtn.value // Pega o valor do botão (geralmente definido no HTML com o atributo value), que representa a categoria que será usada no filtro
+    // Pega o valor do botão, que indica a categoria para filtrar (exemplo: 'fantasia', 'disponivel', etc)
+    const categoria = elementoBtn.value
 
-// Esta linha usa um operador ternário para verificar se a categoria escolhida foi 'disponivel'.
-// Se for, filtra os livros com quantidade maior que 0 (ou seja, disponíveis).
-// Caso contrário, filtra os livros pela categoria normalmente (ex: 'fantasia', 'aventura', etc).
-let livrosFiltrados = categoria == 'disponivel' 
-    ? livros.filter(livro => livro.quantidade > 0) 
-    : livros.filter(livros => livros.categoria == categoria) // Filtra o array 'livros' para pegar só os livros que têm a mesma categoria do botão clicado
+    // Se a categoria for 'disponivel', chama a função que filtra os livros disponíveis
+    // Caso contrário, chama a função que filtra os livros pela categoria passada
+    let livrosFiltrados = categoria == 'disponivel' 
+        ? filtrarPorDisponibilidade() 
+        : FiltrarPorCategoria(categoria)
 
+    // Exibe os livros filtrados na tela
+    exibirOsLivrosNaTela(livrosFiltrados)
 
-    exibirOsLivrosNaTela(livrosFiltrados) // Exibe os livros filtrados no formato de tabela no console do navegador
+    // Se o filtro foi por livros disponíveis, exibe também o valor total deles na tela
+    if (categoria == 'disponivel') {
+        exibirValorTotalDosLivrosDisponiveisNaTela() 
+    }
 }
 
+// Função que filtra os livros pela categoria recebida
+function FiltrarPorCategoria(categoria) {
+    // Retorna uma lista com os livros que têm a categoria igual ao parâmetro passado
+    return livros.filter(livros => livros.categoria == categoria)
+}
 
+// Função que filtra os livros disponíveis (quantidade maior que 0)
+function filtrarPorDisponibilidade() {
+    // Retorna uma lista com os livros que têm quantidade > 0
+    return livros.filter(livro => livro.quantidade > 0)
+}
 
+// Função que exibe o valor total dos livros disponíveis na tela
+function exibirValorTotalDosLivrosDisponiveisNaTela() {
+    // Atualiza o conteúdo HTML do elemento responsável por mostrar o valor total
+    elementoComValorTotalDeLivrosDisponiveis.innerHTML =  `
+     <div class="livros__disponiveis">
+      <p>Todos os livros disponíveis por R$ <span id="valor">299,00</span></p>
+    </div>
+    `
+}
