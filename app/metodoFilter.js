@@ -9,7 +9,13 @@ function filtrarLivros () {
 
     const categoria = elementoBtn.value // Pega o valor do botão (geralmente definido no HTML com o atributo value), que representa a categoria que será usada no filtro
 
-    let livrosFiltrados = livros.filter(livros => livros.categoria == categoria) // Filtra o array 'livros' para pegar só os livros que têm a mesma categoria do botão clicado
+// Esta linha usa um operador ternário para verificar se a categoria escolhida foi 'disponivel'.
+// Se for, filtra os livros com quantidade maior que 0 (ou seja, disponíveis).
+// Caso contrário, filtra os livros pela categoria normalmente (ex: 'fantasia', 'aventura', etc).
+let livrosFiltrados = categoria == 'disponivel' 
+    ? livros.filter(livro => livro.quantidade > 0) 
+    : livros.filter(livros => livros.categoria == categoria) // Filtra o array 'livros' para pegar só os livros que têm a mesma categoria do botão clicado
+
 
     exibirOsLivrosNaTela(livrosFiltrados) // Exibe os livros filtrados no formato de tabela no console do navegador
 }
