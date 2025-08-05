@@ -23,7 +23,9 @@ function filtrarLivros () {
 
     // Se o filtro foi por livros disponíveis, exibe também o valor total deles na tela
     if (categoria == 'disponivel') {
-        exibirValorTotalDosLivrosDisponiveisNaTela() 
+        const valorTotal = calcularValorTotalDeLivrosDisponiveis(livrosFiltrados)
+        console.log(valorTotal)
+        exibirValorTotalDosLivrosDisponiveisNaTela(valorTotal) 
     }
 }
 
@@ -40,11 +42,11 @@ function filtrarPorDisponibilidade() {
 }
 
 // Função que exibe o valor total dos livros disponíveis na tela
-function exibirValorTotalDosLivrosDisponiveisNaTela() {
+function exibirValorTotalDosLivrosDisponiveisNaTela(valorTotal) {
     // Atualiza o conteúdo HTML do elemento responsável por mostrar o valor total
     elementoComValorTotalDeLivrosDisponiveis.innerHTML =  `
      <div class="livros__disponiveis">
-      <p>Todos os livros disponíveis por R$ <span id="valor">299,00</span></p>
+      <p>Todos os livros disponíveis por R$ <span id="valor">${valorTotal}</span></p>
     </div>
     `
 }
